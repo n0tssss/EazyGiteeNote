@@ -1,14 +1,14 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-08 17:15:16
+ * @LastEditTime: 2021-10-08 18:01:47
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
  */
 
 // 从 Vue 中引入
-const { createApp, reactive, toRefs } = Vue;
+const { createApp, reactive, toRefs, ref } = Vue;
 
 // 配置文件导入
 import config from "./config.js";
@@ -29,12 +29,19 @@ const App = createApp({
         this.loadTheme();
         // 获取目录 Tree
         this.getTrees();
-        //
+        // 获取仓库具体路径下的内容
         this.getContents("README.md");
     },
     setup() {
+        // 存储dom数组
+        const Refs = ref([]);
+        const setRef = (el) => {
+            Refs.value.push(el);
+        };
+
         return {
-            ...toRefs(data)
+            ...toRefs(data),
+            Refs
         };
     },
     methods: {
@@ -70,7 +77,7 @@ const App = createApp({
                         })
                         .filter(Boolean);
                     // 调试语句
-                    console.log(this.Trees);
+                    // console.log(this.Trees);
                 })
                 .catch((err) => {
                     console.log("报错啦", err);

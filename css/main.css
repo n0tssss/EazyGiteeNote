@@ -1,8 +1,111 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-08 00:38:41
+ * @LastEditTime: 2021-10-08 16:38:48
  * @Description: main
  * @FilePath: \eazy-gitee-note\css\main.css
  * @Mail：mail@n0ts.cn
  */
+
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    word-break: break-all;
+    outline: none;
+    font-family: lovexhj;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: text !important;
+    font: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+html,
+body,
+#main,
+.el-container {
+    height: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 统一过渡 */
+#lovexhj {
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+/* 按钮过渡 */
+.lovexhjToButton {
+    transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+}
+
+/* 定位居中 */
+.wdnmdsubmit {
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+/* 左侧 */
+.el-aside {
+    min-width: 200px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+/* 目录树 */
+.trees {
+    padding: 15px 0;
+    box-sizing: border-box;
+}
+
+/* 目录树头部 */
+.treesHead {
+    margin: 0 0 5px 15px;
+}
+
+/* 目录 */
+.treesItem {
+    padding: 5px 5px 5px 30px;
+    box-sizing: border-box;
+    cursor: pointer;
+    opacity: .6;
+}
+
+.treesItem:hover {
+    opacity: .9;
+}
+
+.treesItemActive {
+    opacity: 1;
+    background-color: rgb(228, 228, 228);
+}
+
+/* 主体 */
+.content {
+    padding: 50px 80px;
+    box-sizing: border-box;
+}

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-08 16:32:02
+ * @LastEditTime: 2021-10-08 17:15:16
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -17,7 +17,9 @@ import config from "./config.js";
 const data = reactive({
     Trees: null, // 仓库下的所有文件
     content: null, // 当前内容
-    contentSelectIndex: -1 // 当前选择的文件
+    contentSelectIndex: -1, // 当前选择的文件
+    treeMenu: "文件", // 菜单默认选择
+    loadContent: false // 笔记加载遮罩
 });
 
 // 创建 Vue 应用
@@ -86,8 +88,11 @@ const App = createApp({
                 return;
             }
 
-            // url 转码
-            // path = encodeURIComponent(path);
+            // 索引修改
+            this.contentSelectIndex = index;
+
+            // 加载遮罩启动
+            this.loadContent = true;
 
             axios
                 .get(`${config.serverBase}/get/contents`, {
@@ -96,15 +101,32 @@ const App = createApp({
                     }
                 })
                 .then((res) => {
+                    this.loadContent = false;
                     this.content = res.data;
+                    // 是否存在内容
+                    if (!this.content.content || this.content.content.trim() == "") {
+                        return this.notify("这里还是空的哦~", "warning");
+                    }
                     // 转为 html
                     this.content.content = marked(this.content.content);
-                    // 索引修改
-                    this.contentSelectIndex = index;
                 })
                 .catch((err) => {
+                    this.loadContent = false;
                     console.log("报错啦", err);
                 });
+        },
+
+        /**
+         * 消息弹框提示
+         * @param {String} message 消息
+         * @param {success, warning, info, error} type 类型
+         */
+        notify(message, type) {
+            this.$notify({
+                message,
+                type,
+                showClose: true
+            });
         }
     }
 });

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-08 16:38:48
+ * @LastEditTime: 2021-10-08 17:08:45
  * @Description: main
  * @FilePath: \eazy-gitee-note\css\main.css
  * @Mail：mail@n0ts.cn
@@ -42,7 +42,7 @@ a {
 }
 
 /* 统一过渡 */
-#lovexhj {
+.treesItem {
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -51,7 +51,7 @@ a {
 }
 
 /* 按钮过渡 */
-.lovexhjToButton {
+.treesItem {
     transition: all 0.1s ease-in-out;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -59,14 +59,21 @@ a {
     -o-transition: all 0.1s ease-in-out;
 }
 
-/* 定位居中 */
-.wdnmdsubmit {
-    left: 50%;
-    transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
+/* 加载遮罩 */
+.el-loading-mask {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.el-loading-spinner .path {
+    stroke: black;
+}
+
+.el-input-number__decrease:hover,
+.el-input-number__increase:hover,
+.el-loading-spinner .el-loading-text,
+.el-loading-spinner i {
+    color: black;
 }
 
 /* 左侧 */
@@ -76,9 +83,23 @@ a {
     overflow-y: scroll;
 }
 
+/* 菜单 */
+.el-tabs__header {
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.el-tabs__item.is-active,
+.el-tabs__item:hover {
+    color: black;
+}
+
+.el-tabs__active-bar {
+    background-color: black;
+}
+
 /* 目录树 */
 .trees {
-    padding: 15px 0;
     box-sizing: border-box;
 }
 
@@ -92,16 +113,17 @@ a {
     padding: 5px 5px 5px 30px;
     box-sizing: border-box;
     cursor: pointer;
-    opacity: .6;
+    opacity: 0.5;
 }
 
 .treesItem:hover {
-    opacity: .9;
+    opacity: 1;
 }
 
 .treesItemActive {
     opacity: 1;
     background-color: rgb(228, 228, 228);
+    border-left: 5px solid black;
 }
 
 /* 主体 */

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-08 18:01:47
+ * @LastEditTime: 2021-10-09 00:57:29
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -33,15 +33,11 @@ const App = createApp({
         this.getContents("README.md");
     },
     setup() {
-        // 存储dom数组
-        const Refs = ref([]);
-        const setRef = (el) => {
-            Refs.value.push(el);
-        };
+        let contentDom = ref(null);
 
         return {
             ...toRefs(data),
-            Refs
+            contentDom
         };
     },
     methods: {
@@ -50,7 +46,6 @@ const App = createApp({
          */
         loadTheme() {
             let link = document.createElement("link");
-            // link.type = "text/css";
             link.rel = "stylesheet";
             link.href = `../css/${config.Themes[0]}.css`;
             document.querySelector("head").appendChild(link);
@@ -116,6 +111,14 @@ const App = createApp({
                     }
                     // 转为 html
                     this.content.content = marked(this.content.content);
+
+                    // 滚动条回到顶部
+                    if (this.contentDom) {
+                        this.contentDom.$el.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+                    }
                 })
                 .catch((err) => {
                     this.loadContent = false;

@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-10-09 17:03:28
+ * @LastEditTime: 2021-10-09 17:19:30
  * @Description: Gitee 笔记
  * @FilePath: /eazy-gitee-note/index.html
  * @Mail：mail@n0ts.cn
@@ -30,7 +30,7 @@
     </head>
     <body>
         <div id="main">
-            <el-container v-if="Trees != null">
+            <el-container v-if="Trees != null" v-loading="loadContent" element-loading-text="全力加载中...">
                 <!-- 左侧 -->
                 <el-aside>
                     <!-- 菜单 -->
@@ -75,8 +75,6 @@
                     class="content"
                     v-if="content"
                     v-html="content.content"
-                    v-loading="loadContent"
-                    element-loading-text="全力加载中..."
                     ref="contentDom"
                 ></el-main>
             </el-container>

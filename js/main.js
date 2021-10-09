@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-09 00:57:29
+ * @LastEditTime: 2021-10-09 10:03:19
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -110,6 +110,21 @@ const App = createApp({
                         return this.notify("这里还是空的哦~", "warning");
                     }
                     // 转为 html
+                    marked.setOptions({
+                        breaks: false, // 如果为true，添加<br>一个换行符（copies GitHub）。需要gfm是true。
+                        renderer: new marked.Renderer(), // 将标记渲染为HTML的函数的对象。有关详细信息，请参阅扩展性
+                        gfm: true, // 如果为true，使用被认可的GitHub Flavored Markdown（GFM）规范
+                        pedantic: false, // 如果为true，尽可能遵照原始markdown.pl。不修复原有的错误或表现。关闭并覆盖gfm。
+                        sanitize: false, // 如果为true，使用sanitizer函数对传递到markdownstring的HTML进行清理。
+                        tables: true, // 如果为true且gfm为true，使用GFM Tables扩展。
+                        smartLists: true, // 如果为true，使用比markdown.pl拥有的更智能的列表行为。
+                        smartypants: false, // 如果为true，使用“智能”排版标点符号来表示引号和短划线。
+                        headerIds: true, // 如果为true，在生成标题时包含id属性。（h1，h2，h3等）
+                        // 一个函数用于突出显示代码块的功能，请参阅Asynchronous highlighting.。
+                        highlight: function (code) {
+                            return hljs.highlightAuto(code).value;
+                        }
+                    });
                     this.content.content = marked(this.content.content);
 
                     // 滚动条回到顶部

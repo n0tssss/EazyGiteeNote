@@ -1,3 +1,8 @@
+* {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
+        sans-serif;
+}
+
 /* 滚动条 */
 *::-webkit-scrollbar {
     width: 5px;
@@ -21,3 +26,45 @@
     background-color: rgb(250, 250, 250);
 }
 
+/* 加载遮罩背景颜色 */
+.el-loading-mask {
+    background-color: rgba(240, 240, 240, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+/* 加载图标颜色 */
+.el-loading-spinner .path {
+    stroke: black;
+}
+
+/* 加载文字颜色 */
+.el-input-number__decrease:hover,
+.el-input-number__increase:hover,
+.el-loading-spinner .el-loading-text,
+.el-loading-spinner i {
+    color: black;
+}
+
+/* 左侧菜单字体颜色 */
+.el-tabs__item.is-active,
+.el-tabs__item:hover {
+    color: black;
+}
+
+/* 左侧菜单线条颜色 */
+.el-tabs__active-bar {
+    background-color: black;
+}
+
+/* 笔记悬浮样式 */
+.treesItem:hover {
+    opacity: 1;
+    border-left: 5px solid rgb(185, 185, 185);
+}
+
+/* 选中笔记样式 */
+.treesItemActive {
+    opacity: 1;
+    background-color: rgb(228, 228, 228);
+    border-left: 5px solid black;
+}

@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-09 10:03:19
+ * @LastEditTime: 2021-10-09 17:04:54
  * @Description: main
- * @FilePath: \eazy-gitee-note\js\main.js
+ * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
  */
 
@@ -19,7 +19,9 @@ const data = reactive({
     content: null, // 当前内容
     contentSelectIndex: -1, // 当前选择的文件
     treeMenu: "文件", // 菜单默认选择
-    loadContent: false // 笔记加载遮罩
+    loadContent: false, // 笔记加载遮罩
+    menuData: null, // 文章目录数据
+    menuSelectIndex: 0 // 当前目录选择索引
 });
 
 // 创建 Vue 应用
@@ -127,18 +129,57 @@ const App = createApp({
                     });
                     this.content.content = marked(this.content.content);
 
-                    // 滚动条回到顶部
-                    if (this.contentDom) {
+                    // 获取文章目录
+                    setTimeout(() => {
+                        // 索引复原
+                        this.menuSelectIndex = 0;
+
+                        // 滚动条回到顶部
                         this.contentDom.$el.scrollTo({
                             top: 0,
                             behavior: "smooth"
                         });
-                    }
+
+                        // 获取文章目录
+                        this.getContentMenu();
+                    }, 0);
                 })
                 .catch((err) => {
                     this.loadContent = false;
                     console.log("报错啦", err);
                 });
+        },
+
+        /**
+         * 获取文章目录
+         */
+        getContentMenu() {
+            let dom = this.contentDom.$el.querySelectorAll("h1, h2, h3, h4");
+            this.menuData = [...dom].map((item) => {
+                // 获取标签名，id，内容，距离顶边高度
+                let { tagName, id, textContent, offsetTop } = item;
+                return {
+                    tagName,
+                    id,
+                    textContent,
+                    offsetTop
+                };
+            });
+            // 调试语句
+            console.log(this.menuData);
+        },
+
+        /**
+         * 目录选择
+         * @param {*} index 索引
+         * @param {*} top 滚动距离
+         */
+        menuSelect(index, top) {
+            this.menuSelectIndex = index;
+            this.contentDom.$el.scrollTo({
+                top: top - 30,
+                behavior: "smooth"
+            });
         },
 
         /**

@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-08 17:45:54
+ * @LastEditTime: 2021-10-09 17:00:19
  * @Description: main
- * @FilePath: \eazy-gitee-note\css\main.css
+ * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
  */
 
@@ -13,7 +13,6 @@
     padding: 0;
     word-break: break-all;
     outline: none;
-    font-family: lovexhj;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -22,8 +21,6 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: text !important;
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
-        sans-serif;
 }
 
 [v-cloak] {
@@ -60,23 +57,6 @@ a {
     -o-transition: all 0.1s ease-in-out;
 }
 
-/* 加载遮罩 */
-.el-loading-mask {
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-}
-
-.el-loading-spinner .path {
-    stroke: black;
-}
-
-.el-input-number__decrease:hover,
-.el-input-number__increase:hover,
-.el-loading-spinner .el-loading-text,
-.el-loading-spinner i {
-    color: black;
-}
-
 /* 左侧 */
 .el-aside {
     min-width: 200px;
@@ -91,17 +71,9 @@ a {
     box-sizing: border-box;
 }
 
-.el-tabs__item.is-active,
-.el-tabs__item:hover {
-    color: black;
-}
-
-.el-tabs__active-bar {
-    background-color: black;
-}
-
 /* 文件树 */
-.trees {
+.trees,
+.contentTrees {
     padding-bottom: 20px;
     box-sizing: border-box;
 }
@@ -113,26 +85,37 @@ a {
 
 /* 文件列表 */
 .treesItem {
-    padding: 5px 5px 5px 30px;
+    padding: 8px 5px 8px 30px;
     box-sizing: border-box;
     cursor: pointer;
     opacity: 0.5;
 }
 
-.treesItem:hover {
-    opacity: 1;
-    border-left: 5px solid rgb(185, 185, 185);
-}
-
-.treesItemActive {
-    opacity: 1;
-    background-color: rgb(228, 228, 228);
-    border-left: 5px solid black;
-}
-
 /* 目录 */
 .contentTrees {
     padding: 0 15px;
+}
+
+.contentItem {
+    padding: 5px;
+    cursor: pointer;
+    opacity: .5;
+}
+
+.contentTrees .H2 {
+    padding-left: 20px;
+}
+
+.contentTrees .H3 {
+    padding-left: 30px;
+}
+
+.contentTrees .H4 {
+    padding-left: 40px;
+}
+
+.contentItemActive {
+    opacity: 1;
 }
 
 /* 主体 */

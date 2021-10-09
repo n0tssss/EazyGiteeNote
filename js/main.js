@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-09 17:14:26
+ * @LastEditTime: 2021-10-09 17:33:37
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -165,8 +165,6 @@ const App = createApp({
                     offsetTop
                 };
             });
-            // 调试语句
-            console.log(this.menuData);
         },
 
         /**
@@ -177,7 +175,6 @@ const App = createApp({
         menuSelect(index, top) {
             this.menuSelectIndex = index;
             this.contentDom.$el.scrollTo({
-                // top: top - 30,
                 top,
                 behavior: "smooth"
             });

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-09 17:33:37
+ * @LastEditTime: 2021-10-11 10:23:13
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -31,8 +31,6 @@ const App = createApp({
         this.loadTheme();
         // 获取目录 Tree
         this.getTrees();
-        // 获取仓库具体路径下的内容
-        this.getContents("README.md");
     },
     setup() {
         let contentDom = ref(null);
@@ -73,6 +71,9 @@ const App = createApp({
                             }
                         })
                         .filter(Boolean);
+
+                    // 获取仓库具体路径下的内容
+                    this.getContents("README.md");
                     // 调试语句
                     // console.log(this.Trees);
                 })
@@ -106,9 +107,9 @@ const App = createApp({
                 })
                 .then((res) => {
                     this.loadContent = false;
-                    this.content = res.data;
+                    this.content = res.data.content;
                     // 是否存在内容
-                    if (!this.content.content || this.content.content.trim() == "") {
+                    if (!this.content || this.content.trim() == "") {
                         return this.notify("这里还是空的哦~", "warning");
                     }
                     // 转为 html
@@ -127,7 +128,7 @@ const App = createApp({
                             return hljs.highlightAuto(code).value;
                         }
                     });
-                    this.content.content = marked(this.content.content);
+                    this.content = marked(this.content);
 
                     // 获取文章目录
                     setTimeout(() => {

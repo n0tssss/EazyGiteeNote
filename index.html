@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-10-09 17:19:30
+ * @LastEditTime: 2021-10-11 10:22:52
  * @Description: Gitee 笔记
  * @FilePath: /eazy-gitee-note/index.html
  * @Mail：mail@n0ts.cn
@@ -30,7 +30,11 @@
     </head>
     <body>
         <div id="main">
-            <el-container v-if="Trees != null" v-loading="loadContent" element-loading-text="全力加载中...">
+            <!-- 加载 -->
+            <div class="loading" v-if="!Trees">
+                <p>加载中</p>
+            </div>
+            <el-container v-cloak v-else v-loading="loadContent" element-loading-text="全力加载中...">
                 <!-- 左侧 -->
                 <el-aside>
                     <!-- 菜单 -->
@@ -71,12 +75,10 @@
                     </el-tabs>
                 </el-aside>
                 <!-- 主体 -->
-                <el-main
-                    class="content"
-                    v-if="content"
-                    v-html="content.content"
-                    ref="contentDom"
-                ></el-main>
+                <el-main class="content" v-if="content" v-html="content" ref="contentDom"></el-main>
+                <div class="content" v-else>
+                    <p>还没有笔记吧？</p>
+                </div>
             </el-container>
         </div>
 

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-11 10:23:13
+ * @LastEditTime: 2021-10-11 15:39:42
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -108,10 +108,12 @@ const App = createApp({
                 .then((res) => {
                     this.loadContent = false;
                     this.content = res.data.content;
+
                     // 是否存在内容
                     if (!this.content || this.content.trim() == "") {
-                        return this.notify("这里还是空的哦~", "warning");
+                        this.content = `## 这里空空如也～\n快去写点东西吧！`;
                     }
+
                     // 转为 html
                     marked.setOptions({
                         breaks: false, // 如果为true，添加<br>一个换行符（copies GitHub）。需要gfm是true。
@@ -128,7 +130,9 @@ const App = createApp({
                             return hljs.highlightAuto(code).value;
                         }
                     });
-                    this.content = marked(this.content);
+
+                    // 转换为 html，超链接新建页面打开
+                    this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
 
                     // 获取文章目录
                     setTimeout(() => {
@@ -155,6 +159,7 @@ const App = createApp({
          * 获取文章目录
          */
         getContentMenu() {
+            this.menuData = null;
             let dom = this.contentDom.$el.querySelectorAll("h1, h2, h3, h4");
             this.menuData = [...dom].map((item) => {
                 // 获取标签名，id，内容，距离顶边高度

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-11 10:23:00
+ * @LastEditTime: 2021-10-11 15:23:36
  * @Description: main
  * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
@@ -43,6 +43,10 @@ img {
     width: 100%;
 }
 
+code {
+    white-space: pre-wrap;
+}
+
 /* 统一过渡 */
 .treesItem {
     transition: all 0.3s ease-in-out;
@@ -53,7 +57,7 @@ img {
 }
 
 /* 按钮过渡 */
-.treesItem {
+.leftButton {
     transition: all 0.1s ease-in-out;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
@@ -63,10 +67,49 @@ img {
 
 /* 左侧 */
 .el-aside {
+    position: relative;
     min-width: 200px;
     height: 100%;
-    overflow-y: scroll;
+    overflow: hidden;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/* 收缩按钮 */
+.leftButton {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    border-radius: 20px 0 0 20px;
+    -webkit-border-radius: 20px 0 0 20px;
+    -moz-border-radius: 20px 0 0 20px;
+    -ms-border-radius: 20px 0 0 20px;
+    -o-border-radius: 20px 0 0 20px;
+}
+
+.leftButton:active {
+    transform: translate(0, -50%) scale(.9);
+    -webkit-transform: translate(0, -50%) scale(.9);
+    -moz-transform: translate(0, -50%) scale(.9);
+    -ms-transform: translate(0, -50%) scale(.9);
+    -o-transform: translate(0, -50%) scale(.9);
+}
+
+.el-tabs,
+.el-tabs__content,
+.el-tab-pane {
+    height: 100%;
 }
 
 /* 菜单 */
@@ -78,8 +121,9 @@ img {
 /* 文件树 */
 .trees,
 .contentTrees {
-    padding-bottom: 20px;
+    height: 92%;
     box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 /* 文件列表头部 */

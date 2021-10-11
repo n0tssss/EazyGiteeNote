@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-10-11 10:22:52
+ * @LastEditTime: 2021-10-11 15:28:29
  * @Description: Gitee 笔记
  * @FilePath: /eazy-gitee-note/index.html
  * @Mail：mail@n0ts.cn
@@ -36,7 +36,7 @@
             </div>
             <el-container v-cloak v-else v-loading="loadContent" element-loading-text="全力加载中...">
                 <!-- 左侧 -->
-                <el-aside>
+                <el-aside class="el-asideHide">
                     <!-- 菜单 -->
                     <el-tabs v-model="treeMenu">
                         <!-- 文件树 -->
@@ -75,10 +75,7 @@
                     </el-tabs>
                 </el-aside>
                 <!-- 主体 -->
-                <el-main class="content" v-if="content" v-html="content" ref="contentDom"></el-main>
-                <div class="content" v-else>
-                    <p>还没有笔记吧？</p>
-                </div>
+                <el-main class="content" v-html="content" ref="contentDom"></el-main>
             </el-container>
         </div>
 

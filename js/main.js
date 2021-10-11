@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-11 15:39:42
+ * @LastEditTime: 2021-10-11 17:21:41
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -21,7 +21,8 @@ const data = reactive({
     treeMenu: "文件", // 菜单默认选择
     loadContent: false, // 笔记加载遮罩
     menuData: null, // 文章目录数据
-    menuSelectIndex: 0 // 当前目录选择索引
+    menuSelectIndex: 0, // 当前目录选择索引
+    menuShow: true, // 菜单是否展开
 });
 
 // 创建 Vue 应用
@@ -140,7 +141,7 @@ const App = createApp({
                         this.menuSelectIndex = 0;
 
                         // 滚动条回到顶部
-                        this.contentDom.$el.scrollTo({
+                        this.contentDom.scrollTo({
                             top: 0,
                             behavior: "smooth"
                         });
@@ -160,7 +161,7 @@ const App = createApp({
          */
         getContentMenu() {
             this.menuData = null;
-            let dom = this.contentDom.$el.querySelectorAll("h1, h2, h3, h4");
+            let dom = this.contentDom.querySelectorAll("h1, h2, h3, h4");
             this.menuData = [...dom].map((item) => {
                 // 获取标签名，id，内容，距离顶边高度
                 let { tagName, id, textContent, offsetTop } = item;
@@ -180,7 +181,7 @@ const App = createApp({
          */
         menuSelect(index, top) {
             this.menuSelectIndex = index;
-            this.contentDom.$el.scrollTo({
+            this.contentDom.scrollTo({
                 top,
                 behavior: "smooth"
             });
@@ -197,6 +198,27 @@ const App = createApp({
                 type,
                 showClose: true
             });
+        },
+
+        /**
+         * 菜单展开与隐藏
+         */
+        menuShowOrHide() {
+            this.menuShow = !this.menuShow;
+        },
+
+        /**
+         * 切换主题
+         */
+        checkTheme() {
+            this.notify("开发中...\n敬请期待！", "info");
+        },
+
+        /**
+         * 打开设置
+         */
+        openSetting() {
+            this.notify("开发中，敬请期待！", "info");
         }
     }
 });
@@ -205,4 +227,4 @@ const App = createApp({
 App.use(ElementPlus);
 
 // 挂载到根节点
-App.mount("#main");
+App.mount("#app");

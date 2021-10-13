@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-14 00:35:07
+ * @LastEditTime: 2021-10-14 00:52:46
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -149,6 +149,7 @@ const App = createApp({
 
                         // 获取文章目录
                         this.getContentMenu();
+                        this.loadImgView();
                     }, 0);
                 })
                 .catch((err) => {
@@ -172,6 +173,16 @@ const App = createApp({
                     textContent,
                     offsetTop
                 };
+            });
+        },
+
+        /**
+         * 文章内图片查看加载
+         */
+        loadImgView() {
+            let img = this.contentDom.querySelectorAll("img");
+            img.forEach(item => {
+                new Viewer(item)
             });
         },
 

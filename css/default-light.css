@@ -79,6 +79,23 @@
     color: #4183c4;
 }
 
+.content img {
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.content img:hover {
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
 .content h1,
 .content h2,
 .content h3,
@@ -269,6 +286,10 @@
 .content code {
     background-color: #f3f4f4;
     padding: 0 2px 0 2px;
+}
+
+.content p code {
+    padding: 2px 5px;
 }
 
 .content pre {

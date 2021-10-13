@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-10-14 00:59:41
+ * @LastEditTime: 2021-10-14 01:29:29
  * @Description: Gitee 笔记
  * @FilePath: \eazy-gitee-note\index.html
  * @Mail：mail@n0ts.cn
@@ -21,11 +21,6 @@
             rel="stylesheet"
         />
         <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-        <!-- <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/base16/onedark.min.css" rel="stylesheet"> -->
-        <link
-            href="https://cdn.bootcdn.net/ajax/libs/highlight.js/11.2.0/styles/base16/github.min.css"
-            rel="stylesheet"
-        />
         <link href="https://cdn.bootcdn.net/ajax/libs/viewerjs/1.10.1/viewer.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="./css/main.css" />
     </head>
@@ -74,9 +69,45 @@
                                 </div>
                             </div>
                         </el-tab-pane>
+
+                        <el-tab-pane label="目录" name="目录">
+                            <div class="contentTrees">
+                                <div
+                                    :class="{ contentItem: true, contentItemActive: index == menuSelectIndex, [item.tagName]: true }"
+                                    v-for="(item, index) in menuData"
+                                    @click="menuSelect(index, item.offsetTop)"
+                                >
+                                    {{ item.textContent }}
+                                </div>
+                            </div>
+                        </el-tab-pane><el-tab-pane label="目录" name="目录">
+                            <div class="contentTrees">
+                                <div
+                                    :class="{ contentItem: true, contentItemActive: index == menuSelectIndex, [item.tagName]: true }"
+                                    v-for="(item, index) in menuData"
+                                    @click="menuSelect(index, item.offsetTop)"
+                                >
+                                    {{ item.textContent }}
+                                </div>
+                            </div>
+                        </el-tab-pane><el-tab-pane label="目录" name="目录">
+                            <div class="contentTrees">
+                                <div
+                                    :class="{ contentItem: true, contentItemActive: index == menuSelectIndex, [item.tagName]: true }"
+                                    v-for="(item, index) in menuData"
+                                    @click="menuSelect(index, item.offsetTop)"
+                                >
+                                    {{ item.textContent }}
+                                </div>
+                            </div>
+                        </el-tab-pane>
+
                     </el-tabs>
                     <!-- 底部菜单 -->
                     <div class="bottomMenu">
+                        <div content="回到顶部" @click="backTop">
+                            <i class="fa fa-angle-up"></i>
+                        </div>
                         <div content="收起菜单" @click="menuShowOrHide" v-if="menuShow">
                             <i class="fa fa-angle-left"></i>
                         </div>
@@ -92,9 +123,9 @@
                     </div>
                 </div>
                 <!-- 内容 -->
-                <div :class="{ body: true, bodyHide: !menuShow }">
+                <div class="body">
                     <!-- 文章内容 -->
-                    <div class="content" v-html="content" ref="contentDom"></div>
+                    <div :class="{ content: true, contentHide: !menuShow }" v-html="content" ref="contentDom"></div>
                 </div>
             </div>
         </div>

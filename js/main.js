@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-14 01:06:12
+ * @LastEditTime: 2021-10-14 01:21:21
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -161,10 +161,7 @@ const App = createApp({
             this.menuSelectIndex = 0;
 
             // 滚动条回到顶部
-            this.contentDom.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            this.backTop(0);
 
             // 获取文章目录
             this.getContentMenu();
@@ -223,6 +220,16 @@ const App = createApp({
                 message,
                 type,
                 showClose: true
+            });
+        },
+
+        /**
+         * 滚动条到指定位置
+         */
+        backTop(top) {
+            this.contentDom.scrollTo({
+                top,
+                behavior: "smooth"
             });
         },
 

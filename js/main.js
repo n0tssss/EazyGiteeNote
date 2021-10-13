@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-11 17:21:41
+ * @LastEditTime: 2021-10-14 00:35:07
  * @Description: main
- * @FilePath: /eazy-gitee-note/js/main.js
+ * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
  */
 
@@ -12,6 +12,7 @@ const { createApp, reactive, toRefs, ref } = Vue;
 
 // 配置文件导入
 import config from "./config.js";
+import api from "./api.js";
 
 // 数据
 const data = reactive({
@@ -22,7 +23,7 @@ const data = reactive({
     loadContent: false, // 笔记加载遮罩
     menuData: null, // 文章目录数据
     menuSelectIndex: 0, // 当前目录选择索引
-    menuShow: true, // 菜单是否展开
+    menuShow: true // 菜单是否展开
 });
 
 // 创建 Vue 应用
@@ -57,7 +58,7 @@ const App = createApp({
          */
         getTrees() {
             axios
-                .get(`${config.serverBase}/get/trees`)
+                .get(api.get("trees"))
                 .then((resData) => {
                     this.Trees = resData.data;
                     // 数据过滤，保留 md 后缀的文件
@@ -101,7 +102,7 @@ const App = createApp({
             this.loadContent = true;
 
             axios
-                .get(`${config.serverBase}/get/contents`, {
+                .get(api.get("contents", [path]), {
                     params: {
                         path
                     }

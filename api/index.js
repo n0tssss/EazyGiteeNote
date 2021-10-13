@@ -1,8 +1,8 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 13:32:19
- * @LastEditTime: 2021-10-08 15:38:09
- * @Description: EazyGiteeNote
+ * @LastEditTime: 2021-10-14 00:34:49
+ * @Description: Gitee 接口
  * @FilePath: \eazy-gitee-note\api\index.js
  * @Mail：mail@n0ts.cn
  */
@@ -32,11 +32,8 @@ app.use(express.json());
  * @param {*} data 数据
  * @returns
  */
-function back(err, data) {
-    return {
-        error: err,
-        data: data
-    };
+function back(type, err = "") {
+    return `<h1>${config[type].msg}</h1><p>${err}</p><img src="${config[type].img}" />`;
 }
 
 /**
@@ -58,62 +55,44 @@ app.all("*", (req, res, next) => {
     next();
 });
 
-/**
- * 获取目录 Tree
- */
-app.get("/get/trees", function (req, res) {
-    axios
-        .get(`https://gitee.com/api/v5/repos/${config.owner}/${config.repo}/git/trees/${config.sha}`, {
-            params: {
-                access_token: config.access_token
-            }
-        })
-        .then((resData) => {
-            let result = resData.data;
-            // 附带上仓库地址
-            result.giteeURL = `https://gitee.com/${config.owner}/${config.repo}/`;
-            res.json(result);
-        })
-        .catch((err) => {
-            res.json(back(err, null));
-        });
-});
-
-/**
- * 获取仓库具体路径下的内容
- */
-app.get("/get/contents", function (req, res) {
-    let { path } = req.query;
+app.all("*", (req, res) => {
+    // 获取数据
+    let {
+        url, // 请求路径
+        method, // 请求方式
+        body, // post 数据
+        query // get 数据
+    } = req;
 
     // 数据验证
-    if (!path) {
-        return res.json(back("缺少 path 参数！", null));
+    if(url == "/") {
+        return res.send(back("success"));
+    }
+    if(url.substring(0, 5) != "/api/") {
+        return res.send(back("jb"));
     }
 
-    // url 转码
-    path = encodeURIComponent(path);
+    // 携带令牌
+    query.access_token = config.access_token;
 
-    axios
-        .get(`https://gitee.com/api/v5/repos/${config.owner}/${config.repo}/contents/${path}`, {
-            params: {
-                access_token: config.access_token
-            }
-        })
-        .then((resData) => {
-            // Base64 解密
-            resData.data.content = new Buffer.from(resData.data.content, "base64").toString();
-            res.json(resData.data);
-        })
-        .catch((err) => {
-            res.json(back(err, null));
-        });
-});
+    // 请求发送
+    axios({
+        url: "https://gitee.com" + url,
+        method,
+        data: body,
+        params: query
+    }).then(res1 => {
+        let { data } = res1;
 
-/**
- * 其他页面处理
- */
-app.get("*", function (req, res) {
-    res.send("Ok");
+        // 获取文件内容解析base64
+        if(data.encoding && data.encoding == "base64") {
+            data.content = new Buffer.from(data.content, "base64").toString();
+        }
+
+        res.json(data);
+    }).catch(err => {
+        return res.send(back("error", `请求地址：${url}，保存信息：${err}`));
+    });
 });
 
 /**

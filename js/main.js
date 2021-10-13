@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-14 01:21:21
+ * @LastEditTime: 2021-10-14 01:43:21
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -157,16 +157,19 @@ const App = createApp({
             // 转换为 html，超链接新建页面打开
             this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
 
-            // 索引复原
-            this.menuSelectIndex = 0;
+            setTimeout(() => {
+                // 索引复原
+                this.menuSelectIndex = 0;
 
-            // 滚动条回到顶部
-            this.backTop(0);
+                // 滚动条回到顶部
+                this.backTop(0);
 
-            // 获取文章目录
-            this.getContentMenu();
-            // 文章内图片查看加载
-            this.loadImgView();
+                // 获取文章目录
+                this.getContentMenu();
+
+                // 文章内图片查看加载
+                this.loadImgView();
+            }, 0);
         },
 
         /**

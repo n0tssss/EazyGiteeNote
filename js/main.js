@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-14 00:52:46
+ * @LastEditTime: 2021-10-14 01:06:12
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -61,6 +61,14 @@ const App = createApp({
                 .get(api.get("trees"))
                 .then((resData) => {
                     this.Trees = resData.data;
+
+                    // 数据验证
+                    if (!this.Trees.tree) {
+                        this.content = `## 仓库是空的？\n快去检查吧！`;
+                        // 设置内容
+                        return this.setContent();
+                    }
+
                     // 数据过滤，保留 md 后缀的文件
                     this.Trees.tree = this.Trees.tree
                         .map((item) => {
@@ -80,7 +88,7 @@ const App = createApp({
                     // console.log(this.Trees);
                 })
                 .catch((err) => {
-                    console.log("报错啦", err);
+                    console.error("报错啦！错误信息：", err);
                 });
         },
 
@@ -113,49 +121,55 @@ const App = createApp({
 
                     // 是否存在内容
                     if (!this.content || this.content.trim() == "") {
-                        this.content = `## 这里空空如也～\n快去写点东西吧！`;
+                        this.content = `## 这里空空如也～\n没写点东西还好意思上传？`;
                     }
 
-                    // 转为 html
-                    marked.setOptions({
-                        breaks: false, // 如果为true，添加<br>一个换行符（copies GitHub）。需要gfm是true。
-                        renderer: new marked.Renderer(), // 将标记渲染为HTML的函数的对象。有关详细信息，请参阅扩展性
-                        gfm: true, // 如果为true，使用被认可的GitHub Flavored Markdown（GFM）规范
-                        pedantic: false, // 如果为true，尽可能遵照原始markdown.pl。不修复原有的错误或表现。关闭并覆盖gfm。
-                        sanitize: false, // 如果为true，使用sanitizer函数对传递到markdownstring的HTML进行清理。
-                        tables: true, // 如果为true且gfm为true，使用GFM Tables扩展。
-                        smartLists: true, // 如果为true，使用比markdown.pl拥有的更智能的列表行为。
-                        smartypants: false, // 如果为true，使用“智能”排版标点符号来表示引号和短划线。
-                        headerIds: true, // 如果为true，在生成标题时包含id属性。（h1，h2，h3等）
-                        // 一个函数用于突出显示代码块的功能，请参阅Asynchronous highlighting.。
-                        highlight: function (code) {
-                            return hljs.highlightAuto(code).value;
-                        }
-                    });
-
-                    // 转换为 html，超链接新建页面打开
-                    this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
-
-                    // 获取文章目录
-                    setTimeout(() => {
-                        // 索引复原
-                        this.menuSelectIndex = 0;
-
-                        // 滚动条回到顶部
-                        this.contentDom.scrollTo({
-                            top: 0,
-                            behavior: "smooth"
-                        });
-
-                        // 获取文章目录
-                        this.getContentMenu();
-                        this.loadImgView();
-                    }, 0);
+                    // 设置内容
+                    this.setContent();
                 })
                 .catch((err) => {
                     this.loadContent = false;
                     console.log("报错啦", err);
                 });
+        },
+
+        /**
+         * 设置内容
+         */
+        setContent() {
+            // 转为 html
+            marked.setOptions({
+                breaks: false, // 如果为true，添加<br>一个换行符（copies GitHub）。需要gfm是true。
+                renderer: new marked.Renderer(), // 将标记渲染为HTML的函数的对象。有关详细信息，请参阅扩展性
+                gfm: true, // 如果为true，使用被认可的GitHub Flavored Markdown（GFM）规范
+                pedantic: false, // 如果为true，尽可能遵照原始markdown.pl。不修复原有的错误或表现。关闭并覆盖gfm。
+                sanitize: false, // 如果为true，使用sanitizer函数对传递到markdownstring的HTML进行清理。
+                tables: true, // 如果为true且gfm为true，使用GFM Tables扩展。
+                smartLists: true, // 如果为true，使用比markdown.pl拥有的更智能的列表行为。
+                smartypants: false, // 如果为true，使用“智能”排版标点符号来表示引号和短划线。
+                headerIds: true, // 如果为true，在生成标题时包含id属性。（h1，h2，h3等）
+                // 一个函数用于突出显示代码块的功能，请参阅Asynchronous highlighting.。
+                highlight: function (code) {
+                    return hljs.highlightAuto(code).value;
+                }
+            });
+
+            // 转换为 html，超链接新建页面打开
+            this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
+
+            // 索引复原
+            this.menuSelectIndex = 0;
+
+            // 滚动条回到顶部
+            this.contentDom.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            // 获取文章目录
+            this.getContentMenu();
+            // 文章内图片查看加载
+            this.loadImgView();
         },
 
         /**
@@ -181,8 +195,8 @@ const App = createApp({
          */
         loadImgView() {
             let img = this.contentDom.querySelectorAll("img");
-            img.forEach(item => {
-                new Viewer(item)
+            img.forEach((item) => {
+                new Viewer(item);
             });
         },
 

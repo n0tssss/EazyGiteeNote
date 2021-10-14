@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-15 01:54:53
+ * @LastEditTime: 2021-10-15 02:27:28
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -28,6 +28,7 @@ const data = reactive({
     menuSelectIndex: 0, // 当前目录选择索引
     menuShow: true, // 菜单是否展开
     timeOut: null, // 计算屏幕长度，防抖
+    timeOut2: null, // 计算内容滚动距离，防抖
     ThemeIndex: 0 // 当前主题选择
 });
 
@@ -195,6 +196,9 @@ const App = createApp({
 
                 // 文章内图片查看加载
                 this.loadImgView();
+
+                // 监听内容区滚动条
+                this.listenContentScroll();
             }, 0);
         },
 
@@ -298,6 +302,27 @@ const App = createApp({
                     this.menuShowOrHide();
                 }
             }, 100);
+        },
+
+        /**
+         * 监听内容区滚动条
+         */
+        listenContentScroll() {
+            this.contentDom.addEventListener("scroll", (e) => {
+                if (this.timeOut2) {
+                    clearTimeout(this.timeOut2);
+                }
+                this.timeOut2 = setTimeout(() => {
+                    let top = e.target.scrollTop + 30;
+                    let trees = JSON.parse(JSON.stringify(this.menuData));
+                    for (let i = 0; i < trees.length; i++) {
+                        if (top >= trees[i].offsetTop) {
+                            console.log(top, trees[i].offsetTop);
+                            this.menuSelectIndex = i;
+                        }
+                    }
+                }, 50);
+            });
         }
     }
 });

@@ -21,14 +21,23 @@
     background: #ededed;
 }
 
-/* 左侧目录树背景 */
+/* 左侧目录树背景 与 阴影 */
 .leftMenu {
     background-color: rgb(250, 250, 250);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-/* 左侧收缩按钮 */
-.leftButton {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+/* 目录右下角菜单 */
+.bottomMenu > div {
+    color: black;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+/* 目录右下角菜单提示文字 */
+.bottomMenu > div::before {
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 /* 加载遮罩背景颜色 */
@@ -50,13 +59,13 @@
     color: black;
 }
 
-/* 左侧菜单字体颜色 */
+/* 左侧目录菜单字体颜色 */
 .el-tabs__item.is-active,
 .el-tabs__item:hover {
     color: black;
 }
 
-/* 左侧菜单线条颜色 */
+/* 左侧目录菜单线条颜色 */
 .el-tabs__active-bar {
     background-color: black;
 }
@@ -74,6 +83,7 @@
     border-left: 5px solid black;
 }
 
+/* .content 编辑器样式 */
 .content a {
     color: #4183c4;
 }
@@ -297,7 +307,7 @@
     box-sizing: border-box;
 }
 
-/* code */
+/* 代码高亮 */
 pre code.hljs {
     display: block;
     overflow-x: auto;

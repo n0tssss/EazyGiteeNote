@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-10-14 01:35:07
+ * @LastEditTime: 2021-10-14 23:46:07
  * @Description: Gitee 笔记
  * @FilePath: \eazy-gitee-note\index.html
  * @Mail：mail@n0ts.cn
@@ -33,7 +33,7 @@
             <!-- 主体 -->
             <div class="main" v-cloak v-else v-loading="loadContent" element-loading-text="全力加载中...">
                 <!-- 左侧 -->
-                <div :class="{ leftMenu: true, leftMenuHide: !menuShow }">
+                <div :class="{ leftMenu: true, leftMenuHide: menuShow }">
                     <!-- 菜单 -->
                     <el-tabs v-model="treeMenu">
                         <!-- 文件树 -->
@@ -89,6 +89,8 @@
                         </div> -->
                     </div>
                 </div>
+                <!-- 手机端遮罩 -->
+                <div :class="{ peBlack: true, peBlackHide: menuShow }" @click="menuShowOrHide"></div>
                 <!-- 内容 -->
                 <div class="body">
                     <!-- 文章内容 -->

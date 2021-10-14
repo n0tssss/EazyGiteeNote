@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-14 01:43:21
+ * @LastEditTime: 2021-10-15 00:25:34
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -23,7 +23,8 @@ const data = reactive({
     loadContent: false, // 笔记加载遮罩
     menuData: null, // 文章目录数据
     menuSelectIndex: 0, // 当前目录选择索引
-    menuShow: true // 菜单是否展开
+    menuShow: true, // 菜单是否展开
+    timeOut: null, // 计算屏幕长度，防抖
 });
 
 // 创建 Vue 应用
@@ -33,6 +34,11 @@ const App = createApp({
         this.loadTheme();
         // 获取目录 Tree
         this.getTrees();
+
+        this.screenWidthMenuState();
+        window.onresize = () => {
+            this.screenWidthMenuState();
+        };
     },
     setup() {
         let contentDom = ref(null);
@@ -255,6 +261,23 @@ const App = createApp({
          */
         openSetting() {
             this.notify("开发中，敬请期待！", "info");
+        },
+
+        /**
+         * 根据屏幕宽度决定菜单收缩状态
+         * 用于动态自适应
+         */
+        screenWidthMenuState() {
+            if(this.timeOut) {
+                clearTimeout(this.timeOut);
+            }
+            let state = document.body.clientWidth <= 820;
+            this.timeOut = setTimeout(() => {
+                // 当屏幕小于820 且 菜单是打开的情况下
+                if(state && this.menuShow) {
+                    this.menuShowOrHide();
+                }
+            }, 100);
         }
     }
 });

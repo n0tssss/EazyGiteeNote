@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 13:32:19
- * @LastEditTime: 2021-10-14 00:34:49
+ * @LastEditTime: 2021-10-14 23:28:17
  * @Description: Gitee 接口
  * @FilePath: \eazy-gitee-note\api\index.js
  * @Mail：mail@n0ts.cn
@@ -63,6 +63,11 @@ app.all("*", (req, res) => {
         body, // post 数据
         query // get 数据
     } = req;
+
+    // 只接受 Get
+    if(method != "GET") {
+        return res.send("不是Get不准过！");
+    }
 
     // 数据验证
     if(url == "/") {

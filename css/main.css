@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-15 00:02:45
+ * @LastEditTime: 2021-10-15 01:40:25
  * @Description: main
  * @FilePath: \eazy-gitee-note\css\main.css
  * @Mail：mail@n0ts.cn
@@ -55,7 +55,8 @@ code {
 .leftMenu,
 .main,
 .content,
-.peBlackHide {
+.peBlackHide,
+.contentItem {
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -99,13 +100,12 @@ img {
 .el-tabs__content,
 .el-tab-pane {
     height: calc(100% - 20px);
-    padding-bottom: 10px;
 }
 
 /* 菜单 */
-.el-tabs, .el-tabs__content, .el-tab-pane {
+/* .el-tabs, .el-tabs__content, .el-tab-pane {
     overflow: hidden;
-}
+} */
 
 .el-tabs__header {
     padding: 0 20px;
@@ -114,7 +114,6 @@ img {
 
 /* 文件树 */
 .el-tab-pane {
-    box-sizing: border-box;
     overflow-y: scroll;
 }
 
@@ -152,10 +151,6 @@ img {
 
 .contentTrees .H4 {
     padding-left: 40px;
-}
-
-.contentItemActive {
-    opacity: 1;
 }
 
 /* 手机端遮罩 */

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-15 00:25:34
+ * @LastEditTime: 2021-10-15 01:54:53
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -14,6 +14,9 @@ const { createApp, reactive, toRefs, ref } = Vue;
 import config from "./config.js";
 import api from "./api.js";
 
+// 主题获取
+var localThemeSave = window.localStorage.getItem("theme");
+
 // 数据
 const data = reactive({
     Trees: null, // 仓库下的所有文件
@@ -25,17 +28,25 @@ const data = reactive({
     menuSelectIndex: 0, // 当前目录选择索引
     menuShow: true, // 菜单是否展开
     timeOut: null, // 计算屏幕长度，防抖
+    ThemeIndex: 0 // 当前主题选择
 });
 
 // 创建 Vue 应用
 const App = createApp({
-    mounted() {
+    created() {
+        // 本地主题设置
+        this.ThemeIndex = localThemeSave;
+
         // 加载主题
         this.loadTheme();
+    },
+    mounted() {
         // 获取目录 Tree
         this.getTrees();
 
+        // 根据屏幕宽度决定菜单收缩状态
         this.screenWidthMenuState();
+        // 屏幕宽度发生变化
         window.onresize = () => {
             this.screenWidthMenuState();
         };
@@ -53,9 +64,18 @@ const App = createApp({
          * 加载主题
          */
         loadTheme() {
+            // 是否为最后一个主题
+            if (this.ThemeIndex == config.Themes.length) {
+                this.ThemeIndex = 0;
+            }
+
+            // 当前主题保存
+            window.localStorage.setItem("theme", this.ThemeIndex);
+
+            // 修改主题
             let link = document.createElement("link");
             link.rel = "stylesheet";
-            link.href = `../css/${config.Themes[0]}.css`;
+            link.href = `../css/${config.Themes[this.ThemeIndex++]}.css`;
             document.querySelector("head").appendChild(link);
         },
 
@@ -253,7 +273,7 @@ const App = createApp({
          * 切换主题
          */
         checkTheme() {
-            this.notify("开发中...\n敬请期待！", "info");
+            this.loadTheme();
         },
 
         /**
@@ -268,13 +288,13 @@ const App = createApp({
          * 用于动态自适应
          */
         screenWidthMenuState() {
-            if(this.timeOut) {
+            if (this.timeOut) {
                 clearTimeout(this.timeOut);
             }
             let state = document.body.clientWidth <= 820;
             this.timeOut = setTimeout(() => {
                 // 当屏幕小于820 且 菜单是打开的情况下
-                if(state && this.menuShow) {
+                if (state && this.menuShow) {
                     this.menuShowOrHide();
                 }
             }, 100);

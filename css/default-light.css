@@ -1,54 +1,72 @@
+:root {
+    --scrollbar-track-color: rgba(95, 97, 101, 0.3);
+    --text-color1: black;
+    --bg-color: #f5f5f5;
+    --text-color3: black;
+    --bg-color5: #e9e9e9;
+    --active-color: black;
+    --table-thead-color: #dfe2e5;
+    --table-border-color: #f8f8f8;
+}
+
 * {
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
         sans-serif;
 }
 
+/* 首次加载 */
+.loading {
+    color: var(--active-color);
+    background-color: var(--bg-color);
+}
+
+/* 加载小球 */
+.loading p::before {
+    background-color: var(--active-color);
+}
+
 /* 滚动条 */
-*::-webkit-scrollbar {
-    width: 5px;
-    height: 1px;
+::-webkit-scrollbar {
+    width: 8px;
+    padding-right: 10px;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-*::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    background: #535353;
+::-webkit-scrollbar-track:hover {
+    background-color: var(--scrollbar-track-color) !important;
+    border-radius: 4px;
 }
 
-*::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background: #ededed;
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:active {
+    background-color: var(--active-color) !important;
+    border-radius: 4px;
 }
 
 /* 左侧目录树背景 与 阴影 */
 .leftMenu {
-    background-color: rgb(250, 250, 250);
+    color: var(--text-color1);
+    background-color: var(--bg-color);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 /* 目录右下角菜单 */
-.bottomMenu > div {
-    color: black;
-    background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-
-/* 目录右下角菜单提示文字 */
+.bottomMenu > div,
 .bottomMenu > div::before {
-    background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    color: var(--text-color1);
+    background-color: var(--bg-color);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 /* 加载遮罩背景颜色 */
 .el-loading-mask {
-    background-color: rgba(240, 240, 240, 0.5);
+    background-color: rgba(212, 212, 212, 0.5);
     backdrop-filter: blur(5px);
 }
 
 /* 加载图标颜色 */
 .el-loading-spinner .path {
-    stroke: black;
+    stroke: var(--active-color);
 }
 
 /* 加载文字颜色 */
@@ -56,31 +74,62 @@
 .el-input-number__increase:hover,
 .el-loading-spinner .el-loading-text,
 .el-loading-spinner i {
-    color: black;
+    color: var(--active-color);
 }
 
 /* 左侧目录菜单字体颜色 */
+.el-tabs__item {
+    color: var(--text-color3);
+}
+
+/* 左侧目录菜单字体 选中颜色 */
 .el-tabs__item.is-active,
 .el-tabs__item:hover {
-    color: black;
+    color: var(--text-color1);
 }
 
 /* 左侧目录菜单线条颜色 */
+.el-tabs__nav-wrap::after {
+    background-color: var(--bg-color5);
+}
+
+/* 左侧目录菜单线条 选中颜色 */
 .el-tabs__active-bar {
-    background-color: black;
+    background-color: var(--text-color1);
+}
+
+/* 左侧顶部跳转仓库 */
+.treesHead a {
+    color: var(--text-color1);
 }
 
 /* 笔记悬浮样式 */
 .treesItem:hover {
     opacity: 1;
-    border-left: 5px solid rgb(185, 185, 185);
+    border-left: 5px solid var(--active-color);
 }
 
 /* 选中笔记样式 */
 .treesItemActive {
     opacity: 1;
-    background-color: rgb(228, 228, 228);
-    border-left: 5px solid black;
+    background-color: var(--bg-color5);
+    border-left: 5px solid var(--active-color);
+}
+
+/* 目录未选中 */
+.contentItem {
+    opacity: 0.5;
+}
+
+/* 目录选中 */
+.contentItemActive {
+    opacity: 1;
+}
+
+/* 内容页 */
+.content {
+    background-color: var(--bg-color);
+    color: var(--text-color1);
 }
 
 /* .content 编辑器样式 */
@@ -233,7 +282,7 @@
 }
 
 .content blockquote {
-    border-left: 4px solid #dfe2e5;
+    border-left: 4px solid var(--active-color);
     padding: 0 15px;
     color: #777777;
 }
@@ -248,44 +297,54 @@
     border-collapse: collapse;
 }
 
-.content table tr {
-    border: 1px solid #dfe2e5;
+.content table thead tr {
+    background-color: var(--table-thead-color);
+}
+
+.content table tr th {
+    font-weight: bold;
+    border-left: 2px solid var(--table-border-color);
+    border-right: 2px solid var(--table-border-color);
+    text-align: left;
+    margin: 0;
+    padding: 6px 13px;
+}
+
+.content table tbody tr {
+    border-top: 2px solid var(--table-border-color);
     margin: 0;
     padding: 0;
 }
 
-.content table tr:nth-child(2n),
-.content thead {
-    background-color: #f8f8f8;
+.content table tbody tr:nth-child(2n) {
+    background-color: var(--bg-color5);
 }
 
-.content table th {
-    font-weight: bold;
-    border: 1px solid #dfe2e5;
-    border-bottom: 0;
+.content table tbody tr:nth-child(2n + 1) {
+    background-color: var(--bg-color5);
+}
+
+.content table tr td {
+    border-left: 2px solid var(--table-border-color);
+    border-right: 2px solid var(--table-border-color);
+    text-align: left;
     margin: 0;
     padding: 6px 13px;
 }
 
-.content table td {
-    border: 1px solid #dfe2e5;
-    margin: 0;
-    padding: 6px 13px;
+.content table tr th:first-child,
+.content table tr td:first-child {
+    border-left-width: 0px;
 }
 
-.content table th:first-child,
-.content table td:first-child {
-    margin-top: 0;
-}
-
-.content table th:last-child,
-.content table td:last-child {
-    margin-bottom: 0;
+.content table tr th:last-child,
+.content table tr td:last-child {
+    border-right-width: 0px;
 }
 
 .content code,
 .content tt {
-    background-color: #f8f8f8;
+    background-color: var(--bg-color5);
     border-radius: 3px;
     padding: 0;
     padding: 2px 4px 0px 4px;
@@ -293,18 +352,31 @@
 }
 
 .content code {
-    background-color: #f3f4f4;
+    background-color: var(--bg-color5);
     padding: 0 2px 0 2px;
 }
 
 .content p code {
-    padding: 2px 5px;
+    font-size: 0.9em;
+    background-color: var(--bg-color5);
+    padding: 0.3em;
+    padding-top: 0.15em;
+    padding-bottom: 0.15em;
+    border-radius: 0.25rem;
 }
 
 .content pre {
-    background-color: #f3f4f4;
+    background-color: var(--bg-color5);
     padding: 20px;
     box-sizing: border-box;
+}
+
+.content kbd {
+    background: var(--bg-color5);
+    color: var(--text-color1);
+    box-shadow: 0 3px 0 var(--scrollbar-track-color);
+    padding: 2px 8px;
+    margin: 0 3px;
 }
 
 /* 代码高亮 */

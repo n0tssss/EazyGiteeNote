@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-15 02:27:28
+ * @LastEditTime: 2021-10-15 02:44:40
  * @Description: main
  * @FilePath: \eazy-gitee-note\js\main.js
  * @Mail：mail@n0ts.cn
@@ -36,7 +36,7 @@ const data = reactive({
 const App = createApp({
     created() {
         // 本地主题设置
-        this.ThemeIndex = localThemeSave;
+        this.ThemeIndex = !isNaN(localThemeSave) ? localThemeSave : 0;
 
         // 加载主题
         this.loadTheme();
@@ -65,8 +65,8 @@ const App = createApp({
          * 加载主题
          */
         loadTheme() {
-            // 是否为最后一个主题
-            if (this.ThemeIndex == config.Themes.length) {
+            // 如果不存在 || 是否为最后一个主题
+            if (!this.ThemeIndex || this.ThemeIndex == config.Themes.length) {
                 this.ThemeIndex = 0;
             }
 

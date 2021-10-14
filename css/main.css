@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-15 01:40:25
+ * @LastEditTime: 2021-10-15 02:55:47
  * @Description: main
  * @FilePath: \eazy-gitee-note\css\main.css
  * @Mail：mail@n0ts.cn
@@ -103,9 +103,17 @@ img {
 }
 
 /* 菜单 */
-/* .el-tabs, .el-tabs__content, .el-tab-pane {
-    overflow: hidden;
-} */
+.el-icon-arrow-left:before,
+.el-icon-arrow-right:before,
+.el-tabs__nav-wrap::after {
+    visibility: hidden;
+}
+
+.leftMenuHide .el-icon-arrow-left:before,
+.leftMenuHide .el-icon-arrow-right:before,
+.leftMenuHide .el-tabs__nav-wrap::after {
+    visibility: inherit;
+}
 
 .el-tabs__header {
     padding: 0 20px;

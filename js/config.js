@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 14:14:37
- * @LastEditTime: 2021-10-14 23:52:54
+ * @LastEditTime: 2021-10-21 16:40:57
  * @Description: 配置
- * @FilePath: \eazy-gitee-note\js\config.js
+ * @FilePath: /eazy-gitee-note/js/config.js
  * @Mail：mail@n0ts.cn
  */
 
@@ -18,7 +18,7 @@ export default {
         sha: "master"
     },
     // 后端地址
-    serverBase: "http://localhost:3002",
+    serverBase: "http://localhost:5000/api/gitee",
     // 主题配置
     Themes: ["default-light", "default-dark"]
 };

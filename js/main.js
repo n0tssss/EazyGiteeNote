@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-15 02:44:40
+ * @LastEditTime: 2021-10-21 17:31:22
  * @Description: main
- * @FilePath: \eazy-gitee-note\js\main.js
+ * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
  */
 
@@ -85,7 +85,9 @@ const App = createApp({
          */
         getTrees() {
             axios
-                .get(api.get("trees"))
+                .post(config.serverBase, {
+                    path: api.getTree
+                })
                 .then((resData) => {
                     this.Trees = resData.data;
 
@@ -137,10 +139,8 @@ const App = createApp({
             this.loadContent = true;
 
             axios
-                .get(api.get("contents", [path]), {
-                    params: {
-                        path
-                    }
+                .post(config.serverBase, {
+                    path: api.getContent + encodeURIComponent(path)
                 })
                 .then((res) => {
                     this.loadContent = false;
@@ -182,7 +182,7 @@ const App = createApp({
             });
 
             // 转换为 html，超链接新建页面打开
-            this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
+            this.content = marked(Base64.decode(this.content)).replaceAll("<a ", "<a target='_blank' ");
 
             setTimeout(() => {
                 // 索引复原
@@ -317,7 +317,6 @@ const App = createApp({
                     let trees = JSON.parse(JSON.stringify(this.menuData));
                     for (let i = 0; i < trees.length; i++) {
                         if (top >= trees[i].offsetTop) {
-                            console.log(top, trees[i].offsetTop);
                             this.menuSelectIndex = i;
                         }
                     }

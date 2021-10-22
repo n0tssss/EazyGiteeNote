@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-21 17:31:22
+ * @LastEditTime: 2021-10-22 16:13:05
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -84,9 +84,12 @@ const App = createApp({
          * 获取目录 Tree
          */
         getTrees() {
+            console.log(api.getTree);
             axios
-                .post(config.serverBase, {
-                    path: api.getTree
+                .get(config.serverBase, {
+                    params: {
+                        path: api.getTree
+                    }
                 })
                 .then((resData) => {
                     this.Trees = resData.data;
@@ -139,8 +142,10 @@ const App = createApp({
             this.loadContent = true;
 
             axios
-                .post(config.serverBase, {
-                    path: api.getContent + encodeURIComponent(path)
+                .get(config.serverBase, {
+                    params: {
+                        path: api.getContent + encodeURIComponent(path) + "?access_token={0}"
+                    }
                 })
                 .then((res) => {
                     this.loadContent = false;

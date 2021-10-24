@@ -12,7 +12,7 @@
 
 ## 使用教程
 
-前往 [Gitee AccessToken 管理平台 (n0ts.cn)](https://gitee.n0ts.cn/) 注册一个账号，并录入自己码云的 Access Token，权限最少需要给与 Issues 操作权限
+前往 [Gitee AccessToken 管理平台 (n0ts.cn)](https://gitee.n0ts.cn/) 注册一个账号，并录入自己码云的 Access Token，权限最少需要给与 Project 操作权限
 
 然后在 `js/config.js` 中修改如下选项
 

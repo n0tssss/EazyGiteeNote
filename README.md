@@ -34,3 +34,10 @@ gitee: {
 serverBase: "https://giteeapi.n0ts.cn/10015",
 ```
 
+
+
+## 笔记是怎样展示的？
+
+全部 markdown 文件丢到仓库根目录即可！
+
+参考：[note: 个人笔记 (gitee.com)](https://gitee.com/n0ts/note)

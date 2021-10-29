@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-22 17:47:41
+ * @LastEditTime: 2021-10-29 11:01:01
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -188,6 +188,11 @@ const App = createApp({
 
             // 转换为 html，超链接新建页面打开
             this.content = marked(Base64.decode(this.content)).replaceAll("<a ", "<a target='_blank' ");
+
+            // 转换后是否为空
+            if (!this.content || this.content.trim() == "") {
+                this.content = "<h2>这里空空如也～</h2><p>没写点东西还好意思上传？</p>";
+            }
 
             setTimeout(() => {
                 // 索引复原

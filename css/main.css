@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-15 02:55:47
+ * @LastEditTime: 2021-10-29 10:43:03
  * @Description: main
- * @FilePath: \eazy-gitee-note\css\main.css
+ * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
  */
 
@@ -47,6 +47,7 @@ img {
 
 code {
     white-space: pre-wrap;
+    font-family: "Fira Code";
 }
 
 /* 统一过渡 */

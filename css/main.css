@@ -1,9 +1,9 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-10-29 10:49:34
+ * @LastEditTime: 2021-11-03 21:09:46
  * @Description: main
- * @FilePath: /eazy-gitee-note/css/main.css
+ * @FilePath: \eazy-gitee-note\css\main.css
  * @Mail：mail@n0ts.cn
  */
 
@@ -50,7 +50,8 @@ code {
 }
 
 .language-js span,
-code {
+code,
+code * {
     font-family: "Fira Code" !important;
 }
 

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-10-29 11:01:01
+ * @LastEditTime: 2021-11-10 11:16:36
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -47,6 +47,7 @@ const App = createApp({
 
         // 根据屏幕宽度决定菜单收缩状态
         this.screenWidthMenuState();
+
         // 屏幕宽度发生变化
         window.onresize = () => {
             this.screenWidthMenuState();
@@ -84,7 +85,6 @@ const App = createApp({
          * 获取目录 Tree
          */
         getTrees() {
-            console.log(api.getTree);
             axios
                 .get(config.serverBase, {
                     params: {
@@ -134,6 +134,9 @@ const App = createApp({
             if (!path) {
                 return;
             }
+
+            // path url编码
+            path = encodeURIComponent(path);
 
             // 索引修改
             this.contentSelectIndex = index;

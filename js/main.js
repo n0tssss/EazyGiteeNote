@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-11-17 11:01:45
+ * @LastEditTime: 2021-11-17 11:34:48
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -234,7 +234,6 @@ const App = createApp({
          */
         loadImgView() {
             let img = this.contentDom.querySelectorAll("img");
-            console.log(config);
             img.forEach((item) => {
                 if (item.src.includes(location.origin)) {
                     item.src = item.src.replace(

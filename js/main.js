@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-11-10 11:16:36
+ * @LastEditTime: 2021-11-17 11:01:45
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -47,7 +47,6 @@ const App = createApp({
 
         // 根据屏幕宽度决定菜单收缩状态
         this.screenWidthMenuState();
-
         // 屏幕宽度发生变化
         window.onresize = () => {
             this.screenWidthMenuState();
@@ -75,10 +74,7 @@ const App = createApp({
             window.localStorage.setItem("theme", this.ThemeIndex);
 
             // 修改主题
-            let link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = `./css/${config.Themes[this.ThemeIndex++]}.css`;
-            document.querySelector("head").appendChild(link);
+            document.querySelector("#stylesheet").href = `./css/${config.Themes[this.ThemeIndex++]}.css`;
         },
 
         /**
@@ -134,9 +130,6 @@ const App = createApp({
             if (!path) {
                 return;
             }
-
-            // path url编码
-            path = encodeURIComponent(path);
 
             // 索引修改
             this.contentSelectIndex = index;
@@ -201,6 +194,9 @@ const App = createApp({
                 // 索引复原
                 this.menuSelectIndex = 0;
 
+                // 添加代码行号
+                this.rowNum();
+
                 // 滚动条回到顶部
                 this.backTop(0);
 
@@ -238,9 +234,30 @@ const App = createApp({
          */
         loadImgView() {
             let img = this.contentDom.querySelectorAll("img");
+            console.log(config);
             img.forEach((item) => {
+                if (item.src.includes(location.origin)) {
+                    item.src = item.src.replace(
+                        location.origin,
+                        `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}`
+                    );
+                }
                 new Viewer(item);
             });
+        },
+
+        /**
+         * 添加代码行号
+         */
+        rowNum() {
+            let e = document.querySelectorAll("pre code");
+            for (let i = 0; i < e.length; i++) {
+                // 给每一行代码添加 li 包裹，形成整体 ul > li
+                e[i].innerHTML = "<ul><li>" + e[i].innerHTML.replace(/\n/g, "\n</li><li>") + "\n</li></ul>";
+                // 删除最后的空行
+                let l = e[i].querySelectorAll("ul li");
+                l[l.length - 1].remove();
+            }
         },
 
         /**
@@ -333,7 +350,7 @@ const App = createApp({
                             this.menuSelectIndex = i;
                         }
                     }
-                }, 50);
+                }, 10);
             });
         }
     }

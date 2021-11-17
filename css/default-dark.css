@@ -125,6 +125,7 @@
 /* 目录选中 */
 .contentItemActive {
     opacity: 1;
+    font-weight: bold;
 }
 
 /* 内容页 */
@@ -144,6 +145,7 @@
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    margin: 10px 0;
 }
 
 .content img:hover {
@@ -369,7 +371,7 @@
 
 .content pre {
     background-color: var(--bg-color5);
-    padding: 20px;
+    padding: 0 20px;
     box-sizing: border-box;
 }
 
@@ -453,4 +455,8 @@ code.hljs {
 }
 .hljs-link {
     text-decoration: underline;
+}
+
+code ul li::marker {
+    color: gray;
 }

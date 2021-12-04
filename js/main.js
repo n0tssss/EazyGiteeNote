@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-11-17 11:34:48
+ * @LastEditTime: 2021-12-05 01:18:38
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -29,7 +29,8 @@ const data = reactive({
     menuShow: true, // 菜单是否展开
     timeOut: null, // 计算屏幕长度，防抖
     timeOut2: null, // 计算内容滚动距离，防抖
-    ThemeIndex: 0 // 当前主题选择
+    ThemeIndex: 0, // 当前主题选择
+    childFile: "" // 子文件夹路径
 });
 
 // 创建 Vue 应用
@@ -112,8 +113,6 @@ const App = createApp({
 
                     // 获取仓库具体路径下的内容
                     this.getContents("README.md");
-                    // 调试语句
-                    // console.log(this.Trees);
                 })
                 .catch((err) => {
                     console.error("报错啦！错误信息：", err);
@@ -130,6 +129,9 @@ const App = createApp({
             if (!path) {
                 return;
             }
+
+            // 子文件夹路径获取
+            this.childFile = path.includes("/") ? path.substring(0, path.lastIndexOf("/")) : "";
 
             // 索引修改
             this.contentSelectIndex = index;
@@ -190,6 +192,19 @@ const App = createApp({
                 this.content = "<h2>这里空空如也～</h2><p>没写点东西还好意思上传？</p>";
             }
 
+            // 获取内容中全部图片的 src
+            this.content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
+                // 是否为 url
+                let testVol = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/.test(capture);
+                // 不是 url 则添加仓库链接
+                if (!testVol) {
+                    this.content = this.content.replace(
+                        capture,
+                        `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`
+                    );
+                }
+            });
+
             setTimeout(() => {
                 // 索引复原
                 this.menuSelectIndex = 0;
@@ -218,11 +233,10 @@ const App = createApp({
             this.menuData = null;
             let dom = this.contentDom.querySelectorAll("h1, h2, h3, h4");
             this.menuData = [...dom].map((item) => {
-                // 获取标签名，id，内容，距离顶边高度
-                let { tagName, id, textContent, offsetTop } = item;
+                // 获取标签名，内容，距离顶边高度
+                let { tagName, textContent, offsetTop } = item;
                 return {
                     tagName,
-                    id,
                     textContent,
                     offsetTop
                 };
@@ -235,12 +249,6 @@ const App = createApp({
         loadImgView() {
             let img = this.contentDom.querySelectorAll("img");
             img.forEach((item) => {
-                if (item.src.includes(location.origin)) {
-                    item.src = item.src.replace(
-                        location.origin,
-                        `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}`
-                    );
-                }
                 new Viewer(item);
             });
         },
@@ -261,11 +269,15 @@ const App = createApp({
 
         /**
          * 目录选择
-         * @param {*} index 索引
-         * @param {*} top 滚动距离
+         * @param {*} i 索引
          */
-        menuSelect(index, top) {
-            this.menuSelectIndex = index;
+        menuSelect(i) {
+            // 设置索引高亮
+            this.menuSelectIndex = i;
+
+            // 获取滚动高度
+            let top = this.contentDom.querySelectorAll("h1, h2, h3, h4")[i].offsetTop;
+
             this.contentDom.scrollTo({
                 top,
                 behavior: "smooth"
@@ -342,14 +354,20 @@ const App = createApp({
                     clearTimeout(this.timeOut2);
                 }
                 this.timeOut2 = setTimeout(() => {
+                    // 计算高度增加一丢丢
                     let top = e.target.scrollTop + 30;
-                    let trees = JSON.parse(JSON.stringify(this.menuData));
+
+                    // 实时获取标题元素
+                    let trees = this.contentDom.querySelectorAll("h1, h2, h3, h4");
+
+                    // 遍历判断当前高度对应标题位置
                     for (let i = 0; i < trees.length; i++) {
+                        // 当滚动高度大于对应索引改变高亮
                         if (top >= trees[i].offsetTop) {
                             this.menuSelectIndex = i;
                         }
                     }
-                }, 10);
+                }, 50);
             });
         }
     }

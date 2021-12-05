@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-12-05 01:18:38
+ * @LastEditTime: 2021-12-05 13:59:04
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -200,7 +200,7 @@ const App = createApp({
                 if (!testVol) {
                     this.content = this.content.replace(
                         capture,
-                        `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`
+                        decodeURIComponent(`https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`)
                     );
                 }
             });

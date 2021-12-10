@@ -136,6 +136,27 @@
 /* .content 编辑器样式 */
 .content a {
     color: #4183c4;
+    position: relative;
+}
+
+.content a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    background-color: #4183c4;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+.content a:hover::after {
+    width: 100%;
 }
 
 .content img {

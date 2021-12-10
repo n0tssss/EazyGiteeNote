@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-12-05 13:59:04
+ * @LastEditTime: 2021-12-10 17:14:29
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -30,7 +30,7 @@ const data = reactive({
     timeOut: null, // 计算屏幕长度，防抖
     timeOut2: null, // 计算内容滚动距离，防抖
     ThemeIndex: 0, // 当前主题选择
-    childFile: "" // 子文件夹路径
+    childFile: "", // 子文件夹路径
 });
 
 // 创建 Vue 应用
@@ -247,10 +247,7 @@ const App = createApp({
          * 文章内图片查看加载
          */
         loadImgView() {
-            let img = this.contentDom.querySelectorAll("img");
-            img.forEach((item) => {
-                new Viewer(item);
-            });
+            new Viewer(document.querySelector(".content"));
         },
 
         /**

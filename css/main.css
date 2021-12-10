@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-12-05 00:29:06
+ * @LastEditTime: 2021-12-10 16:01:38
  * @Description: main
  * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
@@ -40,7 +40,8 @@ a {
 }
 
 img {
-    max-height: 200px;
+    max-width: 100%;
+    max-height: 400px;
     cursor: pointer;
 }
 
@@ -200,10 +201,6 @@ img {
     overflow-y: scroll;
 }
 
-.contentHide {
-    padding: 50px 20%;
-}
-
 /* 加载 */
 .loading {
     position: fixed;
@@ -333,7 +330,7 @@ img {
         z-index: 2;
     }
 
-    .contentHide {
+    .content {
         padding: 50px 10%;
     }
 
@@ -348,7 +345,7 @@ img {
         min-width: 230px;
     }
 
-    .contentHide {
+    .content {
         padding: 50px 5%;
     }
 }

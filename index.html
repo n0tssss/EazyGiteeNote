@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-11-17 10:12:51
+ * @LastEditTime: 2021-12-05 01:25:37
  * @Description: Gitee 笔记
  * @FilePath: /eazy-gitee-note/index.html
  * @Mail：mail@n0ts.cn
@@ -65,7 +65,7 @@
                                 <div
                                     :class="{ contentItem: true, contentItemActive: index == menuSelectIndex, [item.tagName]: true }"
                                     v-for="(item, index) in menuData"
-                                    @click="menuSelect(index, item.offsetTop)"
+                                    @click="menuSelect(index)"
                                 >
                                     {{ item.textContent }}
                                 </div>

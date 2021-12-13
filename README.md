@@ -4,7 +4,7 @@
 
 做一个简约实用，基于Gitee的学习笔记吧！
 
-开发中...
+持续更新开发中...
 
 [预览地址](https://n0ts.gitee.io/eazy-gitee-note/)
 
@@ -33,6 +33,12 @@ gitee: {
 // 后端地址
 serverBase: "https://giteeapi.n0ts.cn/10015",
 ```
+
+
+
+## 如何更新？
+
+除了 `js/config.js` 文件以外全部覆盖即可
 
 
 

@@ -498,3 +498,7 @@ code.hljs {
 code ul li::marker {
     color: gray;
 }
+
+p {
+    line-height: 1.5rem;
+}

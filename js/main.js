@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-12-10 17:14:29
+ * @LastEditTime: 2021-12-13 16:48:45
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -31,6 +31,8 @@ const data = reactive({
     timeOut2: null, // 计算内容滚动距离，防抖
     ThemeIndex: 0, // 当前主题选择
     childFile: "", // 子文件夹路径
+    Viewer: null, // 查看图片集
+    contentPaddingTop: 50 // 内容页内边高度
 });
 
 // 创建 Vue 应用
@@ -125,6 +127,12 @@ const App = createApp({
          * @returns 文件数据
          */
         getContents(path, index) {
+            // 索引修改 & 是否重复
+            if (this.contentSelectIndex == index) {
+                return;
+            }
+            this.contentSelectIndex = index;
+
             // 数据验证
             if (!path) {
                 return;
@@ -132,9 +140,6 @@ const App = createApp({
 
             // 子文件夹路径获取
             this.childFile = path.includes("/") ? path.substring(0, path.lastIndexOf("/")) : "";
-
-            // 索引修改
-            this.contentSelectIndex = index;
 
             // 加载遮罩启动
             this.loadContent = true;
@@ -200,7 +205,9 @@ const App = createApp({
                 if (!testVol) {
                     this.content = this.content.replace(
                         capture,
-                        decodeURIComponent(`https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`)
+                        decodeURIComponent(
+                            `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`
+                        )
                     );
                 }
             });
@@ -247,7 +254,10 @@ const App = createApp({
          * 文章内图片查看加载
          */
         loadImgView() {
-            new Viewer(document.querySelector(".content"));
+            if (!this.Viewer) {
+                return (this.Viewer = new Viewer(document.querySelector("#content")));
+            }
+            this.Viewer.update();
         },
 
         /**
@@ -355,12 +365,22 @@ const App = createApp({
                     let top = e.target.scrollTop + 30;
 
                     // 实时获取标题元素
-                    let trees = this.contentDom.querySelectorAll("h1, h2, h3, h4");
+                    let dom = this.contentDom.querySelectorAll("h1, h2, h3, h4");
+                    let trees = [...dom].map((item) => {
+                        return item.offsetTop;
+                    });
+
+                    // 第一个标题高度处理
+                    let oneTitle = window.getComputedStyle(dom[0], null).marginTop;
+                    oneTitle = Number(oneTitle.substring(0, oneTitle.length - 2));
+                    if (trees[0] - this.contentPaddingTop == oneTitle) {
+                        trees[0] = 0;
+                    }
 
                     // 遍历判断当前高度对应标题位置
                     for (let i = 0; i < trees.length; i++) {
                         // 当滚动高度大于对应索引改变高亮
-                        if (top >= trees[i].offsetTop) {
+                        if (top >= trees[i]) {
                             this.menuSelectIndex = i;
                         }
                     }

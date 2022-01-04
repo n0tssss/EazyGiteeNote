@@ -16,7 +16,7 @@
 
 然后在 `js/config.js` 中修改如下选项
 
-后端地址为：https://giteeapi.n0ts.cn/编号 ，编号来源于刚刚设置 Access Token 主面板会显示；
+后端地址为：https://giteeapi.n0ts.cn/ 编号 ，编号来源于刚刚设置 Access Token 主面板会显示；
 
 码云账号与仓库名称填上，就可以使用了！
 
@@ -47,3 +47,9 @@ serverBase: "https://giteeapi.n0ts.cn/10015",
 全部 markdown 文件丢到仓库根目录即可！
 
 参考：[note: 个人笔记 (gitee.com)](https://gitee.com/n0ts/note)
+
+
+
+#  后端开源
+
+[GiteeApi: 存储码云私钥，代理请求码云 API](https://gitee.com/n0ts/gitee-api)

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2021-12-13 15:28:16
+ * @LastEditTime: 2022-01-05 17:31:04
  * @Description: main
  * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
@@ -96,6 +96,7 @@ img {
     max-width: 350px;
     position: relative;
     height: 100%;
+    z-index: 2;
 }
 
 .leftMenuHide {
@@ -191,6 +192,26 @@ img {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    display: flex;
+}
+
+/* 编辑器 */
+.editor {
+    min-width: 45%;
+    height: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color1);
+}
+
+.editor > textarea {
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    font-size: 1rem;
+    border: none;
+    background: transparent;
 }
 
 /* 文章内容 */
@@ -261,7 +282,7 @@ img {
     position: absolute;
     bottom: 20px;
     right: 0;
-    z-index: 1;
+    z-index: 2;
     transform: translateX(100%);
     -webkit-transform: translateX(100%);
     -moz-transform: translateX(100%);

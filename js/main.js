@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2021-12-13 16:48:45
+ * @LastEditTime: 2022-01-05 17:24:15
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -32,7 +32,9 @@ const data = reactive({
     ThemeIndex: 0, // 当前主题选择
     childFile: "", // 子文件夹路径
     Viewer: null, // 查看图片集
-    contentPaddingTop: 50 // 内容页内边高度
+    contentPaddingTop: 50, // 内容页内边高度
+    markdown: null, // 当前 markdown 内容
+    editorState: false // 是否启用编辑
 });
 
 // 创建 Vue 应用
@@ -152,7 +154,8 @@ const App = createApp({
                 })
                 .then((res) => {
                     this.loadContent = false;
-                    this.content = res.data.content;
+                    // 存储 markdown 格式
+                    this.markdown = this.content = Base64.decode(res.data.content);
 
                     // 是否存在内容
                     if (!this.content || this.content.trim() == "") {
@@ -190,7 +193,7 @@ const App = createApp({
             });
 
             // 转换为 html，超链接新建页面打开
-            this.content = marked(Base64.decode(this.content)).replaceAll("<a ", "<a target='_blank' ");
+            this.content = marked(this.content).replaceAll("<a ", "<a target='_blank' ");
 
             // 转换后是否为空
             if (!this.content || this.content.trim() == "") {
@@ -386,6 +389,16 @@ const App = createApp({
                     }
                 }, 50);
             });
+        }
+    },
+    watch: {
+        markdown: function (val, old) {
+            // 是否启用编辑
+            if (!this.editorState) {
+                return;
+            }
+            this.content = val;
+            this.setContent();
         }
     }
 });

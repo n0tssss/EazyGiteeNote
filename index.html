@@ -1,7 +1,7 @@
 <!--
  * @Author: N0ts
  * @Date: 2021-10-08 00:36:01
- * @LastEditTime: 2021-12-13 17:02:01
+ * @LastEditTime: 2022-01-05 17:39:37
  * @Description: Gitee 笔记
  * @FilePath: /eazy-gitee-note/index.html
  * @Mail：mail@n0ts.cn
@@ -22,7 +22,7 @@
         />
         <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link href="https://cdn.bootcdn.net/ajax/libs/viewerjs/1.10.1/viewer.min.css" rel="stylesheet" />
-        <link href="https://cdn.bootcdn.net/ajax/libs/firacode/5.2.0/fira_code.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcdn.net/ajax/libs/firacode/5.2.0/fira_code.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="./css/main.css" />
         <link id="stylesheet" rel="stylesheet" href="./css/default-light.css" />
     </head>
@@ -95,8 +95,29 @@
                 <div :class="{ peBlack: true, peBlackHide: menuShow }" @click="menuShowOrHide"></div>
                 <!-- 内容 -->
                 <div class="body">
+                    <!-- 编辑界面 -->
+                    <div class="editor">
+                        <!-- 编辑菜单 -->
+                        <div class="editorMenu">
+                            <el-tooltip
+                                class="box-item"
+                                effect="dark"
+                                content="保存"
+                                placement="bottom"
+                            >
+                                <el-button>bottom</el-button>
+                            </el-tooltip>
+                        </div>
+                        <!-- 编辑框 -->
+                        <textarea v-model="markdown"></textarea>
+                    </div>
                     <!-- 文章内容 -->
-                    <div :class="{ content: true, contentHide: !menuShow }" ref="contentDom" id="content" :style="'padding-top:' + contentPaddingTop + 'px;'">
+                    <div
+                        :class="{ content: true, contentHide: !menuShow }"
+                        ref="contentDom"
+                        id="content"
+                        :style="'padding-top:' + contentPaddingTop + 'px;'"
+                    >
                         <div v-html="content"></div>
                     </div>
                 </div>
@@ -112,6 +133,7 @@
         <script src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
         <script src="https://cdn.bootcdn.net/ajax/libs/viewerjs/1.10.1/viewer.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+        <script src="https://cdn.bootcdn.net/ajax/libs/editor.js/2.23.0-rc.1/editor.min.js"></script>
         <script src="./js/main.js" type="module"></script>
     </body>
 </html>

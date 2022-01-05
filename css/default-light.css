@@ -47,7 +47,7 @@
 .leftMenu {
     color: var(--text-color1);
     background-color: var(--bg-color);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: 3px 0 3px rgba(0, 0, 0, 0.2);
 }
 
 /* 目录右下角菜单 */
@@ -55,7 +55,7 @@
 .bottomMenu > div::before {
     color: var(--text-color1);
     background-color: var(--bg-color);
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
 }
 
 /* 加载遮罩背景颜色 */
@@ -140,7 +140,7 @@
 }
 
 .content a::after {
-    content: '';
+    content: "";
     display: block;
     width: 0;
     height: 2px;

@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2022-01-06 15:02:49
+ * @LastEditTime: 2022-01-07 15:56:33
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -223,7 +223,7 @@ const App = createApp({
                 this.menuSelectIndex = 0;
 
                 // 添加代码行号
-                // this.rowNum();
+                this.rowNum();
 
                 // 获取文章目录
                 this.getContentMenu();

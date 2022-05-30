@@ -7,6 +7,7 @@
     --active-color: black;
     --table-thead-color: #dfe2e5;
     --table-border-color: #f8f8f8;
+    --menu-hover: rgb(211, 211, 211);
 }
 
 * {

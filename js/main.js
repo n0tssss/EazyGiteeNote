@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2022-01-05 17:24:15
+ * @LastEditTime: 2022-01-07 15:56:33
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -164,6 +164,9 @@ const App = createApp({
 
                     // 设置内容
                     this.setContent();
+
+                    // 滚动条回到顶部
+                    this.backTop(0);
                 })
                 .catch((err) => {
                     this.loadContent = false;
@@ -221,9 +224,6 @@ const App = createApp({
 
                 // 添加代码行号
                 this.rowNum();
-
-                // 滚动条回到顶部
-                this.backTop(0);
 
                 // 获取文章目录
                 this.getContentMenu();
@@ -391,16 +391,16 @@ const App = createApp({
             });
         }
     },
-    watch: {
-        markdown: function (val, old) {
-            // 是否启用编辑
-            if (!this.editorState) {
-                return;
-            }
-            this.content = val;
-            this.setContent();
-        }
-    }
+    // watch: {
+    //     markdown: function (val, old) {
+    //         // 是否启用编辑
+    //         if (!this.editorState) {
+    //             return;
+    //         }
+    //         this.content = val;
+    //         this.setContent();
+    //     }
+    // }
 });
 
 // 使用 ElementUI

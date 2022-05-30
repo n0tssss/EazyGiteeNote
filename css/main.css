@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:27
- * @LastEditTime: 2022-01-05 17:31:04
+ * @LastEditTime: 2022-01-06 11:29:55
  * @Description: main
  * @FilePath: /eazy-gitee-note/css/main.css
  * @Mail：mail@n0ts.cn
@@ -63,7 +63,9 @@ code * {
 .content,
 .peBlackHide,
 .contentItem,
-.content a::after {
+.content a::after,
+.editorMenu i,
+.editor {
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -197,10 +199,39 @@ img {
 
 /* 编辑器 */
 .editor {
-    min-width: 45%;
+    min-width: 0;
+    width: 0;
     height: 100%;
     background-color: var(--bg-color);
+    box-shadow: 3px 0 3px rgba(0, 0, 0, 0.2);
+    z-index: 1;
     color: var(--text-color1);
+    overflow: hidden;
+}
+
+.editorShow {
+    min-width: 45%;
+}
+
+.editorMenu {
+    border-bottom: 2px solid var(--bg-color5);
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.editorMenu i {
+    padding: 10px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor: pointer;
+}
+
+.editorMenu i:hover {
+    background: var(--menu-hover);
 }
 
 .editor > textarea {
@@ -212,6 +243,7 @@ img {
     font-size: 1rem;
     border: none;
     background: transparent;
+    color: var(--text-color1);
 }
 
 /* 文章内容 */

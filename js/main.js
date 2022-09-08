@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2022-01-07 15:56:33
+ * @LastEditTime: 2022-09-08 14:05:02
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -212,7 +212,7 @@ const App = createApp({
                     this.content = this.content.replace(
                         capture,
                         decodeURIComponent(
-                            `https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`
+                            `https://api.n0ts.cn/gitee/image?url=https://gitee.com/${config.gitee.owner}/${config.gitee.repo}/raw/${config.gitee.sha}/${this.childFile}/${capture}`
                         )
                     );
                 }

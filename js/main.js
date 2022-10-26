@@ -1,7 +1,7 @@
 /*
  * @Author: N0ts
  * @Date: 2021-10-08 00:37:22
- * @LastEditTime: 2022-09-08 14:05:02
+ * @LastEditTime: 2022-10-26 16:12:26
  * @Description: main
  * @FilePath: /eazy-gitee-note/js/main.js
  * @Mail：mail@n0ts.cn
@@ -87,13 +87,12 @@ const App = createApp({
          */
         getTrees() {
             axios
-                .get(config.serverBase, {
-                    params: {
-                        path: api.getTree
-                    }
+                .post(config.serverBase, {
+                    method: "GET",
+                    url: api.getTree
                 })
                 .then((resData) => {
-                    this.Trees = resData.data;
+                    this.Trees = resData.data.data;
 
                     // 数据验证
                     if (!this.Trees.tree) {
@@ -147,15 +146,14 @@ const App = createApp({
             this.loadContent = true;
 
             axios
-                .get(config.serverBase, {
-                    params: {
-                        path: api.getContent + encodeURIComponent(path) + "?access_token={0}"
-                    }
+                .post(config.serverBase, {
+                    method: "GET",
+                    url: api.getContent + encodeURIComponent(path)
                 })
                 .then((res) => {
                     this.loadContent = false;
                     // 存储 markdown 格式
-                    this.markdown = this.content = Base64.decode(res.data.content);
+                    this.markdown = this.content = Base64.decode(res.data.data.content);
 
                     // 是否存在内容
                     if (!this.content || this.content.trim() == "") {
@@ -390,7 +388,7 @@ const App = createApp({
                 }, 50);
             });
         }
-    },
+    }
     // watch: {
     //     markdown: function (val, old) {
     //         // 是否启用编辑
